@@ -522,7 +522,7 @@ async function sendMessage(text=null,isVoice=false) {
   document.getElementById('sendBtn').disabled=true;
   addMsg('user',msg,isVoice); chatHistory.push({role:'user',content:msg}); showTyping();
   try {
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:buildSystem(),messages:chatHistory.slice(-24)})});
+    const res=await fetch('https://axiom-proxy.xrs7-091.workers.dev',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:buildSystem(),messages:chatHistory.slice(-24)})});
     const data=await res.json(); removeTyping();
     if(data.error)throw new Error(data.error.message);
     const reply=data.content[0].text; chatHistory.push({role:'assistant',content:reply});
